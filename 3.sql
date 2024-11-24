@@ -107,14 +107,3 @@ select * from bookmetrics.author_x_book;
 select * from bookmetrics.book_in_shop;
 select * from bookmetrics.booking;
 
-insert into bookmetrics.book (title, isbn) values (
-'ABA', '1234567890'
-)
-
-
-insert into bookmetrics.shop (name, login, password, contacts) values (
-'Bookvoed', '123', 'aba', '8921'
-)
-
-insert into bookmetrics.book_in_shop(book_id, shop_id, book_number) values
-(1, 1);
