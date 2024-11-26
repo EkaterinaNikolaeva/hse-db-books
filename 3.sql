@@ -9,7 +9,7 @@ drop table if exists bookmetrics.author cascade;
 
 create table bookmetrics.author (
 	author_id serial primary key,
-	initials varchar(255) not null
+	"name" varchar(255) not null
 );
 
 -- 2
@@ -32,7 +32,7 @@ drop table if exists bookmetrics.customer cascade;
 
 create table bookmetrics.customer (
 	customer_id serial primary key,
-	initials varchar(255),
+	"name" varchar(255),
 	mails varchar(128),
 	login varchar(100) not null unique,
 	"password" varchar(128) not null,
@@ -106,4 +106,3 @@ select * from bookmetrics.book;
 select * from bookmetrics.author_x_book;
 select * from bookmetrics.book_in_shop;
 select * from bookmetrics.booking;
-
