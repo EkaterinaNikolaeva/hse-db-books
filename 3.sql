@@ -18,10 +18,10 @@ drop table if exists bookmetrics.shop cascade;
 
 create table bookmetrics.shop (
 	shop_id serial primary key,
-	name varchar(128) not null,
+	"name" varchar(128) not null,
 	address varchar(128),
 	login varchar(100) not null unique,
-	password varchar(128) not null,
+	"password" varchar(128) not null,
 	contacts varchar(128) not null
 );
 
@@ -35,7 +35,7 @@ create table bookmetrics.customer (
 	initials varchar(255),
 	mails varchar(128),
 	login varchar(100) not null unique,
-	password varchar(128) not null,
+	"password" varchar(128) not null,
 	contacts varchar(128)
 );
 
