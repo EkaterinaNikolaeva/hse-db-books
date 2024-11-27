@@ -82,7 +82,7 @@ drop table if exists bookmetrics.booking cascade;
 create table bookmetrics.booking (
 	booking_id serial primary key,
 	shop_id integer references bookmetrics.shop(shop_id) not null,
-	book_id integer references bookmetrics.book(book_id) not null,
+	customer_id integer references bookmetrics.book(book_id) not null,
 	deadline date not null
 );
 
