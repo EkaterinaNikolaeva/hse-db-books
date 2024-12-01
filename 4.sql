@@ -1,6 +1,6 @@
 -- 1
 
-INSERT INTO bookmetrics.author (name) VALUES 
+insert into bookmetrics.author (name) values 
 	('Александр Сергеевич Грибоедов'),
 	('Николай Васильевич Гоголь'),
 	('Александр Сергеевич Пушкин'),
@@ -14,7 +14,7 @@ INSERT INTO bookmetrics.author (name) VALUES
 
 -- 2
 
-INSERT INTO bookmetrics.shop (name, address, login, password, contacts) VALUES 
+insert into bookmetrics.shop (name, address, login, password, contacts) values 
 	('Буквоед', 'г. Санкт-Петербург, пр-т Невский, д. 46, Лит. А', 'shop1', 'password1', 'Customer@bookvoed.ru'),
 	('Буквоед', 'г. Санкт-Петербург, пр-т Московский, д. 109, Лит. А', 'shop2', 'password2', 'Customer@bookvoed.ru'),
 	('Буквоед', 'г. Санкт-Петербург, ул. Комсомола, д. 41', 'shop3', 'password3', 'Customer@bookvoed.ru'),
@@ -30,7 +30,7 @@ INSERT INTO bookmetrics.shop (name, address, login, password, contacts) VALUES
 
 -- 3
 
-INSERT INTO bookmetrics.customer (name, mails, login, password, contacts) VALUES 
+insert into bookmetrics.customer (name, mails, login, password, contacts) values 
 	('Иван Иванов', 'ivan@example.com', 'ivan', 'ivanpassword', ''),
 	('Селезнева Мария', 'maria@example.com', 'maria', 'mariapassword', ''),
 	('Титов Артём', 'artem@example.com', 'artem', 'artempassword', ''),
@@ -39,7 +39,7 @@ INSERT INTO bookmetrics.customer (name, mails, login, password, contacts) VALUES
 
 -- 4
 
-INSERT INTO bookmetrics.book (title, isbn, edition) VALUES 
+insert into bookmetrics.book (title, isbn, edition) values 
 	('Горе от ума', '9785170947164', 'Эксклюзив: Русская классика'),
 	('Ревизор', '9785171049652', 'Эксклюзив: Русская классика'),
 	('Капитанская дочка', '9785170928071', 'Эксклюзив: Русская классика'),
@@ -55,7 +55,7 @@ INSERT INTO bookmetrics.book (title, isbn, edition) VALUES
 
 -- 5
 
-INSERT INTO bookmetrics.author_x_book (author_id, book_id) VALUES 
+insert into bookmetrics.author_x_book (author_id, book_id) values 
 	(1, 1),  -- Грибоедов - Горе от ума
 	(2, 2),  -- Гоголь - Ревизор
 	(3, 3),  -- Пушкин - Капитанская дочка
@@ -70,7 +70,7 @@ INSERT INTO bookmetrics.author_x_book (author_id, book_id) VALUES
 
 -- 6
 
-INSERT INTO bookmetrics.book_in_shop (shop_id, book_id, book_number, price) VALUES 
+insert into bookmetrics.book_in_shop (shop_id, book_id, book_number, price) values 
 
 -- Буквоед
 	(1, 1, 10, 325.00),  -- Горе от ума
@@ -223,7 +223,7 @@ INSERT INTO bookmetrics.book_in_shop (shop_id, book_id, book_number, price) VALU
 
 -- 7
 
-INSERT INTO bookmetrics.booking (shop_id, customer_id, deadline) VALUES 
+insert into bookmetrics.booking (shop_id, customer_id, deadline) values 
 	(1, 1, '2024-12-01'),
 	(1, 2, '2024-12-02'),
 	(1, 3, '2024-12-03'),
@@ -233,7 +233,7 @@ INSERT INTO bookmetrics.booking (shop_id, customer_id, deadline) VALUES
 
 --8
 
-INSERT INTO bookmetrics.book_in_booking (booking_id, book_in_shop_id, book_number) values
+insert into bookmetrics.book_in_booking (booking_id, book_in_shop_id, book_number) values
 
 	(1, 1, 2), 
 	(1, 2, 1), 
