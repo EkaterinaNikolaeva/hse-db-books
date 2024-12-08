@@ -71,7 +71,7 @@ create table bookmetrics.book_in_shop (
 	book_number integer check (book_number >= 0) not null,
 	price decimal(10, 2) check (price >= 0) not null,
 	valid_from timestamp default now()::timestamp,
- 	valid_to timestamp
+ 	valid_to timestamp default '5999-01-01 00:00:00'
 );
 
 
@@ -83,7 +83,7 @@ create table bookmetrics.booking (
 	booking_id serial primary key,
 	shop_id integer references bookmetrics.shop(shop_id) not null,
 	customer_id integer references bookmetrics.customer(customer_id) not null,
-	deadline date not null
+	booking_date timestamp default now()::timestamp not null
 );
 
 -- 8
