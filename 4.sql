@@ -223,7 +223,7 @@ insert into bookmetrics.book_in_shop (shop_id, book_id, book_number, price) valu
 
 -- 7
 
-insert into bookmetrics.booking (shop_id, customer_id, deadline) values 
+insert into bookmetrics.booking (shop_id, customer_id, booking_date) values
 	(1, 1, '2024-12-01'),
 	(1, 2, '2024-12-02'),
 	(1, 3, '2024-12-03'),
@@ -263,3 +263,4 @@ select * from bookmetrics.book;
 select * from bookmetrics.author_x_book;
 select * from bookmetrics.book_in_shop;
 select * from bookmetrics.booking;
+select * from bookmetrics.book_in_booking;
