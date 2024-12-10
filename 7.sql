@@ -13,7 +13,7 @@ from bookmetrics.author;
 
 drop view if exists bookmetrics_view.shop;
 
-CREATE VIEW bookmetrics_view.shop AS
+create view bookmetrics_view.shop as
 select shop_id as id, "name", address, login,
 repeat ('*', length("password") - 2) || right("password", 2) as masked_password, contacts -- не маскирую, так как публичная информация
 from bookmetrics.shop;
@@ -22,7 +22,7 @@ from bookmetrics.shop;
 
 drop view if exists bookmetrics_view.customer;
 
-CREATE VIEW bookmetrics_view.customer AS
+create view bookmetrics_view.customer as
 select customer_id as id, "name", left(mails, 3) ||
 repeat (
     '*', position('@' in mails) - 3
@@ -44,7 +44,7 @@ from bookmetrics.book;
 
 drop view if exists bookmetrics_view.author_x_booktomer;
 
-CREATE VIEW bookmetrics_view.author_x_book AS
+create view bookmetrics_view.author_x_book as
 select author_id, book_id
 from bookmetrics.author_x_book;
 
@@ -52,7 +52,7 @@ from bookmetrics.author_x_book;
 
 drop view if exists bookmetrics_view.book_in_shop;
 
-CREATE VIEW bookmetrics_view.book_in_shop AS
+create view bookmetrics_view.book_in_shop as
 select
     shop_id,
     book_id,
@@ -66,7 +66,7 @@ where
 
 drop view if exists bookmetrics_view.booking;
 
-CREATE VIEW bookmetrics_view.booking AS
+create view bookmetrics_view.booking as
 select
     booking_id as id,
     shop_id,
@@ -77,7 +77,7 @@ from bookmetrics.booking;
 
 drop view if exists bookmetrics_view.book_in_booking;
 
-CREATE VIEW bookmetrics_view.book_in_booking AS
+create view bookmetrics_view.book_in_booking as
 select
     booking_id,
     book_in_shop_id,
