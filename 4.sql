@@ -224,35 +224,30 @@ insert into bookmetrics.book_in_shop (shop_id, book_id, book_number, price) valu
 -- 7
 
 insert into bookmetrics.booking (shop_id, customer_id, booking_date) values
-	(1, 1, '2024-12-01'),
-	(1, 2, '2024-12-02'),
-	(1, 3, '2024-12-03'),
-	(2, 1, '2024-12-04'),
-	(2, 4, '2024-12-05'),
-	(3, 5, '2024-12-06');
+	(1, 1, '2025-12-01'),
+	(1, 2, '2025-12-02'),
+	(1, 3, '2025-12-03'),
+	(2, 1, '2025-12-04'),
+	(2, 4, '2025-12-05'),
+	(3, 5, '2025-12-06');
 
---8
+-- 8
 
 insert into bookmetrics.book_in_booking (booking_id, book_in_shop_id, book_number) values
 
-	(1, 1, 2), 
-	(1, 2, 1), 
-	(1, 3, 1),
-	
-	(2, 1, 1), 
-	(2, 2, 2),
-	
-	(3, 3, 1), 
-	(3, 4, 1),
-	
-	(4, 8, 1), 
-	(4, 9, 1),
-	
-	(5, 2, 1), 
-	
-	(6, 6, 1), 
-	(6, 7, 1);
-	
+	(3, bookmetrics.get_actual_book_in_shop_id(1, 1), 2),
+	(1, bookmetrics.get_actual_book_in_shop_id(1, 2), 1), 
+	(1, bookmetrics.get_actual_book_in_shop_id(1, 3), 1),
+	(2, bookmetrics.get_actual_book_in_shop_id(1, 1), 1), 
+	(2, bookmetrics.get_actual_book_in_shop_id(1, 2), 2),
+	(3, bookmetrics.get_actual_book_in_shop_id(1, 3), 1), 
+	(3, bookmetrics.get_actual_book_in_shop_id(1, 5), 1),
+	(4, bookmetrics.get_actual_book_in_shop_id(1, 8), 1), 
+	(4, bookmetrics.get_actual_book_in_shop_id(1, 9), 1),
+	(5, bookmetrics.get_actual_book_in_shop_id(2, 1), 1), 
+	(6, bookmetrics.get_actual_book_in_shop_id(2, 3), 2), 
+	(6, bookmetrics.get_actual_book_in_shop_id(2, 4), 1);
+
 
 -- select
 
