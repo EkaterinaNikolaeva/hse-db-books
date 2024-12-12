@@ -38,40 +38,7 @@ where bs.valid_to >= now()
 order by b.book_id,
          price_rank;
 
--- 4.1 -- динамика минимальной цены на книги (версия для каждой минуты)
--- заметьте, что книга попадёт в выборку, если момент попадает в её valid_from, valid_to
- with minute_series as
-  (select generate_series(
-                            (select min(valid_from)
-                             from bookmetrics.book_in_shop), now(), '1 minute'::interval) as report_time),
-      actual_prices as
-  (select ms.report_time,
-          bs.book_id,
-          bs.price,
-          bs.shop_id
-   from minute_series ms
-   left join bookmetrics.book_in_shop bs on ms.report_time between bs.valid_from and bs.valid_to
-   where bs.book_number != 0),
-      min_prices as
-  (select report_time,
-          book_id,
-          min(price) as min_price
-   from actual_prices
-   where price is not null
-   group by report_time,
-            book_id)
-select ap.report_time,
-       ap.book_id,
-       ap.shop_id,
-       ap.price
-from actual_prices ap
-join min_prices mp on ap.report_time = mp.report_time
-and ap.book_id = mp.book_id
-and ap.price = mp.min_price
-order by ap.report_time,
-         ap.book_id;
-
--- 4.2 -- динамика минимальной цены на книги (версия для каждого дня)
+-- 4 -- динамика минимальной цены на книги (версия для каждого дня), для большей частоты поменять interval
 with day_series as
   (select generate_series(
                             (select min(valid_from)
@@ -103,4 +70,39 @@ and ap.price = mp.min_price
 order by ap.report_time,
          ap.book_id;
 
--- 5 --
+-- 5 -- Магазины с количеством выгодных книг
+
+with actual_books as (
+    select 
+        bis.shop_id,
+        bis.book_id,
+        bis.price
+    from 
+        bookmetrics.book_in_shop as bis
+    where 
+        now() between bis.valid_from and bis.valid_to 
+        and bis.book_number != 0
+),
+min_price_books as (
+    select 
+        book_id,
+        min(price) as min_price
+    from 
+        actual_books
+    group by 
+        book_id
+)
+select 
+    ab.shop_id, 
+    count(*) as number_cheapest_books
+from 
+    actual_books as ab
+join 
+    min_price_books as mpb on ab.book_id = mpb.book_id and ab.price = mpb.min_price
+group by 
+    ab.shop_id
+order by 
+    number_cheapest_books desc;
+	
+
+
