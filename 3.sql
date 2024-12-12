@@ -9,7 +9,7 @@ drop table if exists bookmetrics.author cascade;
 
 create table bookmetrics.author (
 	author_id serial primary key,
-	"name" varchar(255) not null
+	"name" text not null
 );
 
 -- 2
@@ -18,11 +18,11 @@ drop table if exists bookmetrics.shop cascade;
 
 create table bookmetrics.shop (
 	shop_id serial primary key,
-	"name" varchar(128) not null,
-	address varchar(128),
+	"name" text not null,
+	address text,
 	login varchar(100) not null unique,
 	"password" varchar(128) not null,
-	contacts varchar(128) not null
+	contacts text not null
 );
 
 
@@ -32,11 +32,11 @@ drop table if exists bookmetrics.customer cascade;
 
 create table bookmetrics.customer (
 	customer_id serial primary key,
-	"name" varchar(255),
-	mails varchar(128),
+	"name" text,
+	mails text,
 	login varchar(100) not null unique,
 	"password" varchar(128) not null,
-	contacts varchar(128)
+	contacts text
 );
 
 -- 4
@@ -45,9 +45,9 @@ drop table if exists bookmetrics.book cascade;
 
 create table bookmetrics.book (
 	book_id serial primary key,
-	title varchar(255) not null,
+	title text not null,
 	isbn varchar(13) not null check (regexp_match(isbn, '^\d{10}$') is not null or regexp_match(isbn, '^\d{13}$') is not null),
-	edition varchar(255)
+	edition text
 );
 
 -- 5
