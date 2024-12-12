@@ -106,3 +106,4 @@ select * from bookmetrics.book;
 select * from bookmetrics.author_x_book;
 select * from bookmetrics.book_in_shop;
 select * from bookmetrics.booking;
+select * from bookmetrics.book_in_booking;
