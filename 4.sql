@@ -15,15 +15,15 @@ insert into bookmetrics.author (name) values
 -- 2
 
 insert into bookmetrics.shop (name, address, login, password, contacts) values 
-	('Буквоед', 'г. Санкт-Петербург, пр-т Невский, д. 46, Лит. А', 'shop1', 'password1', 'Customer@bookvoed.ru'),
-	('Буквоед', 'г. Санкт-Петербург, пр-т Московский, д. 109, Лит. А', 'shop2', 'password2', 'Customer@bookvoed.ru'),
-	('Буквоед', 'г. Санкт-Петербург, ул. Комсомола, д. 41', 'shop3', 'password3', 'Customer@bookvoed.ru'),
-	('Читай-город', 'г. Москва, пл. Манежная, д. 1, стр. 2', 'shop4', 'password4', 'Customer@bookvoed.ru'),
-	('Читай-город', 'г. Москва, ул. Таганская, д. 1, стр. 1', 'shop5', 'password5', 'Customer@bookvoed.ru'),
-	('Читай-город', 'г. Москва, ул. Земляной Вал, д. 33', 'shop6', 'password6', 'Customer@bookvoed.ru'),
-	('Читай-город', 'г. Новосибирск, ул. Военная, д. 5', 'shop7', 'password7', 'Customer@bookvoed.ru'),
-	('Читай-город', 'г. Новосибирск, пр-т Красный, д. 31', 'shop8', 'password8', 'Customer@bookvoed.ru'),
-	('Читай-город', 'г. Новосибирск, пл. Карла Маркса, д. 7', 'shop9', 'password9', 'Customer@bookvoed.ru'),
+	('Буквоед', 'г. Санкт-Петербург, пр-т Невский, д. 46, Лит. А', 'shop1', 'password1', 'spb_nevsky_shop@bookvoed.ru'),
+	('Буквоед', 'г. Санкт-Петербург, пр-т Московский, д. 109, Лит. А', 'shop2', 'password2', 'spb_moskovsky_shop@bookvoed.ru'),
+	('Буквоед', 'г. Санкт-Петербург, ул. Комсомола, д. 41', 'shop3', 'password3', 'spb_komsomol@bookvoed.ru'),
+	('Читай-город', 'г. Москва, пл. Манежная, д. 1, стр. 2', 'shop4', 'password4', 'msk_manezhnaya@bookvoed.ru'),
+	('Читай-город', 'г. Москва, ул. Таганская, д. 1, стр. 1', 'shop5', 'password5', 'msk_taganskaya@bookvoed.ru'),
+	('Читай-город', 'г. Москва, ул. Земляной Вал, д. 33', 'shop6', 'password6', 'msk_earthen_rampart@bookvoed.ru'),
+	('Читай-город', 'г. Новосибирск, ул. Военная, д. 5', 'shop7', 'password7', 'nsk_voennaya@bookvoed.ru'),
+	('Читай-город', 'г. Новосибирск, пр-т Красный, д. 31', 'shop8', 'password8', 'nsk_krasny@bookvoed.ru'),
+	('Читай-город', 'г. Новосибирск, пл. Карла Маркса, д. 7', 'shop9', 'password9', 'nsk_karl_marks@bookvoed.ru'),
 	('Дом Книги «Зингер»', 'г. Санкт-Петербург, пр-т Невский, д. 28', 'shop10', 'password10', '+7 (812) 667 84 25'),
 	('Книжная лавка Ходасевич', 'г. Москва, ул. Покровка, д. 6', 'shop11', 'password11', 'xodacevich@ya.ru'),
 	('Фаланстер', 'г. Москва, ул. Тверская, д. 17', 'shop12', 'password12', 'shop@falanster.ru');
@@ -231,9 +231,11 @@ insert into bookmetrics.booking (shop_id, customer_id, booking_date) values
 	(2, 4, '2025-12-05'),
 	(3, 5, '2025-12-06');
 
+
 -- 8
 
 insert into bookmetrics.book_in_booking (booking_id, book_in_shop_id, book_number) values
+
 
 	(3, bookmetrics.get_actual_book_in_shop_id(1, 1), 2),
 	(1, bookmetrics.get_actual_book_in_shop_id(1, 2), 1), 
@@ -247,7 +249,6 @@ insert into bookmetrics.book_in_booking (booking_id, book_in_shop_id, book_numbe
 	(5, bookmetrics.get_actual_book_in_shop_id(2, 1), 1), 
 	(6, bookmetrics.get_actual_book_in_shop_id(2, 3), 2), 
 	(6, bookmetrics.get_actual_book_in_shop_id(2, 4), 1);
-
 
 -- select
 
