@@ -56,8 +56,8 @@ drop table if exists bookmetrics.author_x_book cascade;
 
 create table bookmetrics.author_x_book (
 	record_id serial primary key,
-	author_id integer references bookmetrics.author(author_id) not null,
-	book_id integer references bookmetrics.book(book_id) not null
+	author_id integer references bookmetrics.author(author_id) on delete cascade not null,
+	book_id integer references bookmetrics.book(book_id) on delete cascade not null
 );
 
 -- 6
@@ -66,8 +66,8 @@ drop table if exists bookmetrics.book_in_shop cascade;
 
 create table bookmetrics.book_in_shop (
 	record_id serial primary key,
-	shop_id integer references bookmetrics.shop(shop_id) not null,
-	book_id integer references bookmetrics.book(book_id) not null,
+	shop_id integer references bookmetrics.shop(shop_id) on delete cascade not null,
+	book_id integer references bookmetrics.book(book_id) on delete cascade not null,
 	book_number integer check (book_number >= 0) not null,
 	price decimal(10, 2) check (price >= 0) not null,
 	valid_from timestamp default now()::timestamp,
@@ -81,8 +81,8 @@ drop table if exists bookmetrics.booking cascade;
 
 create table bookmetrics.booking (
 	booking_id serial primary key,
-	shop_id integer references bookmetrics.shop(shop_id) not null,
-	customer_id integer references bookmetrics.customer(customer_id) not null,
+	shop_id integer references bookmetrics.shop(shop_id) on delete cascade not null,
+	customer_id integer references bookmetrics.customer(customer_id) on delete cascade not null,
 	booking_date timestamp default now()::timestamp not null
 );
 
