@@ -43,7 +43,7 @@ returns trigger as $$
 $$ language plpgsql;
 
 create or replace trigger tg_01_quantity_book_in_booking
-after insert on bookmetrics.book_in_booking	
+before insert on bookmetrics.book_in_booking	
 for each row execute function bookmetrics.book_in_shop_quantity_update();
 
 -- 2
@@ -111,31 +111,31 @@ for each row execute function bookmetrics.cancel_old_versions();
 
 -- 1
 
-insert into bookmetrics.booking (shop_id, customer_id) values (1, 1);
-	
-select * from bookmetrics.booking;
-select * from bookmetrics.book_in_booking;
-select * from bookmetrics.book_in_shop;
-
-insert into bookmetrics.book_in_booking (booking_id, book_in_shop_id, book_number)
-values (7, 2, 3);
-
--- 2
-
-select * from bookmetrics.book_in_shop;
-
-insert into bookmetrics.book_in_shop(shop_id, book_id, book_number, price)
-values (1, 1, 10, 300);
-
-select * from bookmetrics.price_changes;
-
--- 3
-
-insert into bookmetrics.book_in_shop(shop_id, book_id, book_number, price)
-values (1, 1, 10, 380);
-
-select * from bookmetrics.price_changes;
-
-select * from bookmetrics.book_in_shop;
+--insert into bookmetrics.booking (shop_id, customer_id) values (1, 1);
+--	
+--select * from bookmetrics.booking;
+--select * from bookmetrics.book_in_booking;
+--select * from bookmetrics.book_in_shop;
+-- 
+--insert into bookmetrics.book_in_booking (booking_id, book_in_shop_id, book_number)
+--values (7, 2, 3);
+--
+---- 2
+--
+--select * from bookmetrics.book_in_shop;
+--
+--insert into bookmetrics.book_in_shop(shop_id, book_id, book_number, price)
+--values (1, 1, 10, 300);
+--
+--select * from bookmetrics.price_changes;
+--
+---- 3
+--
+--insert into bookmetrics.book_in_shop(shop_id, book_id, book_number, price)
+--values (1, 1, 10, 380);
+--
+--select * from bookmetrics.price_changes;
+--
+--select * from bookmetrics.book_in_shop;
 
 -- end checks

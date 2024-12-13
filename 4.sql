@@ -221,43 +221,50 @@ insert into bookmetrics.book_in_shop (shop_id, book_id, book_number, price) valu
 	(12, 10, 5, 450.00),
 	(12, 11, 5, 450.00);
 
--- 7
 
-insert into bookmetrics.booking (shop_id, customer_id, booking_date) values
-	(1, 1, '2024-12-01'),
-	(1, 2, '2024-12-02'),
-	(1, 3, '2024-12-03'),
-	(2, 1, '2024-12-04'),
-	(2, 4, '2024-12-05'),
-	(3, 5, '2024-12-06'),
-	(12, 2, '2024-12-07');
+-- 7, 8
 
---8
+CALL bookmetrics.add_new_booking(
+    'ivan',
+    1,
+    ARRAY[2, 3],
+    ARRAY[1, 1],
+    '2025-12-01'
+);
 
-insert into bookmetrics.book_in_booking (booking_id, book_in_shop_id, book_number) values
+CALL bookmetrics.add_new_booking(
+    'ivan',
+    2,
+    ARRAY[1, 4],
+    ARRAY[1, 2],
+    '2025-12-02'
+);
 
-	(1, 1, 2), 
-	(1, 2, 1), 
-	(1, 3, 1),
-	
-	(2, 1, 1), 
-	(2, 2, 2),
-	
-	(3, 3, 1), 
-	(3, 4, 1),
-	
-	(4, 8, 1), 
-	(4, 9, 1),
-	
-	(5, 2, 1), 
-	
-	(6, 6, 1), 
-	(6, 7, 1),
-	
-	(7, 4, 1),
-	(7, 9, 1),
-	(7, 11, 1);
-	
+
+CALL bookmetrics.add_new_booking(
+    'maria',
+    2,
+    ARRAY[1, 2],
+    ARRAY[1, 1, 1],
+    '2025-12-01'
+);
+
+
+CALL bookmetrics.add_new_booking(
+    'artem',
+    3,
+    ARRAY[5],
+    ARRAY[1],
+    '2025-12-03'
+);
+
+CALL bookmetrics.add_new_booking(
+    'zahar',
+    4,
+    ARRAY[10, 11],
+    ARRAY[2, 3],
+    '2025-12-04'
+);
 
 -- select
 
