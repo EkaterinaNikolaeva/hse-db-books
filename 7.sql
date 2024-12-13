@@ -22,7 +22,7 @@ drop view if exists bookmetrics_view.customer;
 create view bookmetrics_view.customer as
 select
     left("name", 1) || repeat('*', greatest(length("name") - 1, 0)) as masked_name,
-    left(mails, 3) || repeat('*', position('@' in mails) - 3) || right(mails, length(mails) - position('@' in mails) + 1) as masked_email,
+    left(mail, 3) || repeat('*', position('@' in mails) - 3) || right(mails, length(mails) - position('@' in mails) + 1) as masked_email,
     contacts
 from bookmetrics.customer;
 

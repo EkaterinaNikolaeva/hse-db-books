@@ -33,7 +33,7 @@ drop table if exists bookmetrics.customer cascade;
 create table bookmetrics.customer (
 	customer_id serial primary key,
 	"name" text,
-	mails text,
+	mail text,
 	login varchar(100) not null unique,
 	"password" varchar(128) not null,
 	contacts text
@@ -92,8 +92,8 @@ drop table if exists bookmetrics.book_in_booking cascade;
 
 create table bookmetrics.book_in_booking (
 	record_id serial primary key,
-	booking_id integer references bookmetrics.booking(booking_id) not null,
-	book_in_shop_id integer references bookmetrics.book_in_shop(record_id) not null,
+	booking_id integer references bookmetrics.booking(booking_id) on delete cascade not null,
+	book_in_shop_id integer references bookmetrics.book_in_shop(record_id) on delete cascade not null,
 	book_number integer check (book_number >= 0) default 1 not null
 );
 

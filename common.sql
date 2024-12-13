@@ -37,7 +37,7 @@ drop table if exists bookmetrics.customer cascade;
 create table bookmetrics.customer (
 	customer_id serial primary key,
 	"name" text,
-	mails text,
+	mail text,
 	login varchar(100) not null unique,
 	"password" varchar(128) not null,
 	contacts text
@@ -60,8 +60,8 @@ drop table if exists bookmetrics.author_x_book cascade;
 
 create table bookmetrics.author_x_book (
 	record_id serial primary key,
-	author_id integer references bookmetrics.author(author_id) not null,
-	book_id integer references bookmetrics.book(book_id) not null
+	author_id integer references bookmetrics.author(author_id) on delete cascade not null,
+	book_id integer references bookmetrics.book(book_id) on delete cascade not null
 );
 
 -- 6
@@ -70,8 +70,8 @@ drop table if exists bookmetrics.book_in_shop cascade;
 
 create table bookmetrics.book_in_shop (
 	record_id serial primary key,
-	shop_id integer references bookmetrics.shop(shop_id) not null,
-	book_id integer references bookmetrics.book(book_id) not null,
+	shop_id integer references bookmetrics.shop(shop_id) on delete cascade not null,
+	book_id integer references bookmetrics.book(book_id) on delete cascade not null,
 	book_number integer check (book_number >= 0) not null,
 	price decimal(10, 2) check (price >= 0) not null,
 	valid_from timestamp default now()::timestamp,
@@ -85,8 +85,8 @@ drop table if exists bookmetrics.booking cascade;
 
 create table bookmetrics.booking (
 	booking_id serial primary key,
-	shop_id integer references bookmetrics.shop(shop_id) not null,
-	customer_id integer references bookmetrics.customer(customer_id) not null,
+	shop_id integer references bookmetrics.shop(shop_id) on delete cascade not null,
+	customer_id integer references bookmetrics.customer(customer_id) on delete cascade not null,
 	booking_date timestamp default now()::timestamp not null
 );
 
@@ -388,7 +388,7 @@ insert into bookmetrics.shop (name, address, login, password, contacts) values
 
 -- 3
 
-insert into bookmetrics.customer (name, mails, login, password, contacts) values 
+insert into bookmetrics.customer (name, mail, login, password, contacts) values 
 	('Иван Иванов', 'ivan@example.com', 'ivan', 'ivanpassword', ''),
 	('Селезнева Мария', 'maria@example.com', 'maria', 'mariapassword', ''),
 	('Титов Артём', 'artem@example.com', 'artem', 'artempassword', ''),
@@ -661,6 +661,12 @@ values (
         'Эксклюзив: Русская классика'
     );
 
+insert into bookmetrics.author_x_book (author_id, book_id) 
+select (select author_id from bookmetrics.author where "name" = 'Фёдор Михайлович Достоевский'),
+		book_id
+from bookmetrics.book 
+where title = 'Идиот';
+
 select title from bookmetrics.book where isbn = '9785040986842';
 
 update bookmetrics.book
@@ -904,7 +910,7 @@ drop view if exists bookmetrics_view.customer;
 create view bookmetrics_view.customer as
 select
     left("name", 1) || repeat('*', greatest(length("name") - 1, 0)) as masked_name,
-    left(mails, 3) || repeat('*', position('@' in mails) - 3) || right(mails, length(mails) - position('@' in mails) + 1) as masked_email,
+    left(mail, 3) || repeat('*', position('@' in mail) - 3) || right(mail, length(mail) - position('@' in mail) + 1) as masked_email,
     contacts
 from bookmetrics.customer;
 
