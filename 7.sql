@@ -1,3 +1,6 @@
+drop schema if exists bookmetrics_view cascade;
+create schema bookmetrics_view;
+
 drop view if exists bookmetrics_view.author;
 create view bookmetrics_view.author as
 select
