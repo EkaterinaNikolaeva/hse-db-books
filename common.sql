@@ -1,4 +1,6 @@
+-- ########################################################
 -- NUMBER 3
+-- ########################################################
 
 -- 0
 
@@ -110,7 +112,10 @@ select * from bookmetrics.book_in_shop;
 select * from bookmetrics.booking;
 select * from bookmetrics.book_in_booking;
 
+-- ########################################################
 -- NUMBER 9
+-- ########################################################
+
 
 -- 1
 
@@ -254,7 +259,10 @@ for each row execute function bookmetrics.cancel_old_versions();
 
 -- end checks
 
+-- ########################################################
 -- NUMBER 10
+-- ########################################################
+
 
 -- получить актуальный book_in_shop_id по book_id и shop_id
 
@@ -344,7 +352,9 @@ begin
 end;
 $$;
 
+-- ########################################################
 -- NUMBER 4
+-- ########################################################
 
 -- 1
 
@@ -625,7 +635,9 @@ select * from bookmetrics.book_in_shop;
 select * from bookmetrics.booking;
 select * from bookmetrics.book_in_booking;
 
+-- ########################################################
 -- NUMBER 5
+-- ########################################################
 
 --create table bookmetrics.book (
 --   book_id serial primary key,
@@ -702,7 +714,10 @@ where
     contacts not like '%@%'
     and contacts !~ '^[0-9\s()+-]+$';
 
+-- ########################################################
 -- NUMBER 6
+-- ########################################################
+
 
 -- 1 -- общее количество книг и их сумарная стоимость в каждом магазине
 
@@ -860,8 +875,10 @@ from
     left join most_sold_books as msb on a.author_id = msb.author_id and msb.rn = 1
 order by
     a.total_copies_sold desc;
-
+   
+-- ########################################################
 -- NUMBER 7
+-- ########################################################
 
 drop schema if exists bookmetrics_view cascade;
 create schema bookmetrics_view;
@@ -961,7 +978,9 @@ select * from bookmetrics_view.book_in_shop;
 select * from bookmetrics_view.booking;
 select * from bookmetrics_view.book_in_booking;
 
+-- ########################################################
 -- NUMBER 8
+-- ########################################################
 
 -- Отображает статистику по продажам для каждого магазина.
 -- Включает название магазина, количество проданных книг, общий доход
