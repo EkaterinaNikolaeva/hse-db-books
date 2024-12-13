@@ -71,4 +71,4 @@ where
 delete from bookmetrics.shop
 where
     contacts not like '%@%'
-    or contacts ~'^[0-9\s()+-]+$';
+    and contacts !~ '^[0-9\s()+-]+$';
