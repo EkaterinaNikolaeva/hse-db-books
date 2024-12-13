@@ -20,6 +20,12 @@ values (
         'Эксклюзив: Русская классика'
     );
 
+insert into bookmetrics.author_x_book (author_id, book_id) 
+select (select author_id from bookmetrics.author where "name" = 'Фёдор Михайлович Достоевский'),
+		book_id
+from bookmetrics.book 
+where title = 'Идиот';
+
 select title from bookmetrics.book where isbn = '9785040986842';
 
 update bookmetrics.book
@@ -71,4 +77,4 @@ where
 delete from bookmetrics.shop
 where
     contacts not like '%@%'
-    or contacts ~'^[0-9\s()+-]+$';
+    and contacts !~ '^[0-9\s()+-]+$';
