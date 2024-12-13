@@ -30,7 +30,7 @@ insert into bookmetrics.shop (name, address, login, password, contacts) values
 
 -- 3
 
-insert into bookmetrics.customer (name, mails, login, password, contacts) values 
+insert into bookmetrics.customer (name, mail, login, password, contacts) values
 	('Иван Иванов', 'ivan@example.com', 'ivan', 'ivanpassword', ''),
 	('Селезнева Мария', 'maria@example.com', 'maria', 'mariapassword', ''),
 	('Титов Артём', 'artem@example.com', 'artem', 'artempassword', ''),
