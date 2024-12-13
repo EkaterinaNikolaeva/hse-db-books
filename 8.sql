@@ -6,7 +6,6 @@ drop view if exists bookmetrics_view.shop_sales_summary;
 
 create view bookmetrics_view.shop_sales_summary as
 select 
-    s.shop_id,
     s."name" as shop_name,
     sum(bib.book_number) as total_books_sold,
     sum(bib.book_number * bis.price) as total_revenue,
@@ -33,14 +32,12 @@ drop view if exists bookmetrics_view.active_bookings;
 
 create view bookmetrics_view.active_bookings as
 select
-    c.customer_id,
     c.name as customer_name,
-    b.booking_id,
     b.booking_date,
     s.shop_id,
     s.name as shop_name,
     sum(bib.book_number) as total_books_reserved,
-    array_agg (distinct bk.title) as reserved_books
+    array_agg (distinct bk.title || ' #' || bib.book_number) as reserved_books
 from
     bookmetrics.booking b
     join bookmetrics.customer c on b.customer_id = c.customer_id
@@ -65,7 +62,6 @@ drop view if exists bookmetrics_view.author_popularity;
 
 create view bookmetrics_view.author_popularity as
 select 
-    a.author_id,
     a."name" as author_name,
     sum(bib.book_number) as total_books_sold,
     sum(bib.book_number * bis.price) as total_revenue
