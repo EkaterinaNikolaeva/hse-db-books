@@ -22,7 +22,7 @@ group by c.customer_id,
          c.name
 having sum(bib.book_number) > 3;
 
--- 3 -- список актуальных книг с рейтингом по цене
+-- 3 -- список актуальных (записи с valid_to >= now()) книг с рейтингом по цене
 
 select b.book_id,
        b.title,
@@ -70,7 +70,7 @@ and ap.price = mp.min_price
 order by ap.report_time,
          ap.book_id;
 
--- 5 -- Магазины с количеством выгодных книг
+-- 5 -- магазины с количеством выгодных (в других магазинах цена >=) книг
 
 with actual_books as (
     select 
@@ -103,6 +103,57 @@ group by
     ab.shop_id
 order by 
     number_cheapest_books desc;
-	
+
+-- 6 -- рейтинг авторов с количеством проданных копий и количеством книг, которые они написали и их самая популярная книга 
+     -- (считаем что самая популярная у одного автора ровно одна)
+with author_book_sales as (
+    select
+        a.author_id,
+        a.name as author_name,
+        b.book_id,
+        b.title as book_title,
+        coalesce(sum(bib.book_number), 0) as total_copies_sold
+    from
+        bookmetrics.author as a
+        join bookmetrics.author_x_book as ab on a.author_id = ab.author_id
+        join bookmetrics.book as b on ab.book_id = b.book_id
+        left join bookmetrics.book_in_shop as bis on b.book_id = bis.book_id
+        left join bookmetrics.book_in_booking as bib on bis.record_id = bib.book_in_shop_id
+    group by
+        a.author_id, a.name, b.book_id, b.title
+),
+author_stats as (
+    select
+        author_id,
+        author_name,
+        count(distinct book_id) as total_books_written,
+        sum(total_copies_sold) as total_copies_sold
+    from
+        author_book_sales
+    group by
+        author_id, author_name
+),
+most_sold_books as (
+    select
+        author_id,
+        book_title,
+        total_copies_sold,
+        row_number() over (partition by author_id order by total_copies_sold desc) as rn
+    from
+        author_book_sales
+)
+select
+    a.author_id,
+    a.author_name,
+    a.total_books_written,
+    a.total_copies_sold,
+    msb.book_title as most_sold_book,
+    msb.total_copies_sold as copies_sold_for_most_sold_book
+from
+    author_stats as a
+    left join most_sold_books as msb on a.author_id = msb.author_id and msb.rn = 1
+order by
+    a.total_copies_sold desc;
+
 
 
